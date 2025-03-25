@@ -1,0 +1,24 @@
+document.getElementById('patient-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  const patientId = document.getElementById('patient-id').value;
+  const heartRate = document.getElementById('heart-rate').value;
+  const bloodPressure = document.getElementById('blood-pressure').value;
+
+  const data = {
+    patientId,
+    heartRate,
+    bloodPressure
+  };
+
+  const response = await fetch('http://localhost:3000/api/monitoring', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  const responseData = await response.json();
+  document.getElementById('response-message').innerHTML = responseData.message;
+});
