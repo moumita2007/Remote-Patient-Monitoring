@@ -1,0 +1,24 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000;
+
+// Middleware to parse JSON data
+app.use(bodyParser.json());
+
+// Route to handle patient monitoring data
+app.post('/api/monitoring', (req, res) => {
+  const { patientId, heartRate, bloodPressure } = req.body;
+
+  // In a real-world scenario, save this data to a database
+  console.log('Received Data:', { patientId, heartRate, bloodPressure });
+
+  // Send a response back to the client
+  res.json({ message: 'Data received successfully!' });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
